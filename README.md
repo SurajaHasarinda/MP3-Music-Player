@@ -44,7 +44,7 @@ To run the MP3 Music Player locally, follow these steps:
    ```
 2. **Open the project** in your preferred Java IDE.
 3. **Compile and run** the `App.java` file.
-4. **Or you can run the `MP3-Music-Player.exe` file** in the `bin` folder.
+4. **Or you can run the `MP3-Music-Player.exe` file** in the `dist` folder.
 
 ## Screenshots
 
