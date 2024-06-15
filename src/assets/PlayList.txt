@@ -1,3 +1,0 @@
-D:\Projects\JAVA\MP3-Music-Player\MP3-Music-Player\src\assets\Dathin Allan - Lashan Herath [SONG.LK].mp3
-D:\Projects\JAVA\MP3-Music-Player\MP3-Music-Player\src\assets\Mandaram - Newmi Vihansa [SONG.LK].mp3
-D:\Projects\JAVA\MP3-Music-Player\MP3-Music-Player\src\assets\Mandire Hade - Dulan ARX Ft Sanjula Himala [SONG.LK].mp3

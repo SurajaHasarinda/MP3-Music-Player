@@ -16,8 +16,8 @@ public class MusicPlayListDialog extends JDialog {
 
     public MusicPlayListDialog(MusicPlayerGUI musicPlayerGUI) {
         this.musicPlayerGUI = musicPlayerGUI;
+        // to store the paths of the songs
         songPaths = new ArrayList<>();
-
         // configure the dialog
         setTitle("Create Playlist");
         setSize(400, 400);
@@ -47,7 +47,7 @@ public class MusicPlayListDialog extends JDialog {
                 // open file explorer
                 JFileChooser jFileChooser = new JFileChooser();
                 jFileChooser.setFileFilter(new FileNameExtensionFilter("MP3 Files", "mp3"));
-                jFileChooser.setCurrentDirectory(new File("src/assets"));
+                jFileChooser.setCurrentDirectory(new File("src/res"));
                 int result = jFileChooser.showOpenDialog(MusicPlayListDialog.this);
 
                 File selectedFile = jFileChooser.getSelectedFile();
@@ -55,7 +55,6 @@ public class MusicPlayListDialog extends JDialog {
                     JLabel filePathLabel = new JLabel(selectedFile.getPath());
                     filePathLabel.setFont(new Font("Dialog", Font.PLAIN, 12));
                     filePathLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
                     // add to the List
                     songPaths.add(filePathLabel.getText());
                     // add to the container
@@ -87,10 +86,8 @@ public class MusicPlayListDialog extends JDialog {
                         if (!selectedFile.getName().substring(selectedFile.getName().length() - 4).equalsIgnoreCase(".txt")) {
                             selectedFile = new File(selectedFile.getAbsoluteFile() + ".txt");
                         }
-
                         // create the new file at the destination directory
                         selectedFile.createNewFile();
-
                         // write all the song paths to the file
                         FileWriter fileWriter = new FileWriter(selectedFile);
                         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -99,13 +96,10 @@ public class MusicPlayListDialog extends JDialog {
                             bufferedWriter.write(songPath + "\n");
                         }
                         bufferedWriter.close();
-
                         // display a success message
                         JOptionPane.showMessageDialog(MusicPlayListDialog.this, "Playlist saved successfully!");
-
                         // close the dialog
                         MusicPlayListDialog.this.dispose();
-
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -113,6 +107,5 @@ public class MusicPlayListDialog extends JDialog {
             }
         });
         add(savePlaylistButton);
-
     }
 }

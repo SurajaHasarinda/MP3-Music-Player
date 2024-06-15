@@ -8,10 +8,8 @@ import java.util.ArrayList;
 public class MusicPlayer extends PlaybackListener {
     // this will update isPaused more synchronously
     private static final Object playSignal = new Object();
-
     // reference to the GUI
     private MusicPlayerGUI musicPlayerGUI;
-
     // reference to the current song
     private Song currentSong;
 
@@ -22,32 +20,26 @@ public class MusicPlayer extends PlaybackListener {
     private ArrayList<Song> playList;
 
     private int currentPlaylistIndex;
-
     // use JLayer library to create an AdvancedPlayer obj which will handle the audio playback
     private AdvancedPlayer advancedPlayer;
-
     // indicate if the song is paused
     private boolean isPaused;
-
     // indicate if the song is finished
     private boolean isFinished;
 
     private boolean pressNext, pressPrevious;
-
     // indicate where the music is stopped in milliseconds
     private int currentFrame;
 
     public void setCurrentFrame(int frame) {
         this.currentFrame = frame;
     }
-
     // track the current time of the song
     private int currentTimeInMilli;
 
     public void setCurrentTimeInMilli(int timeInMilli) {
         this.currentTimeInMilli = timeInMilli;
     }
-
 
     public MusicPlayer(MusicPlayerGUI musicPlayerGUI) {
         this.musicPlayerGUI = musicPlayerGUI;
@@ -75,7 +67,6 @@ public class MusicPlayer extends PlaybackListener {
 
     public void loadPlayList(File playListFile) {
         playList = new ArrayList<>();
-
         // store the paths from the text file into the playList array list
         try {
             FileReader fileReader = new FileReader(playListFile);
@@ -95,22 +86,16 @@ public class MusicPlayer extends PlaybackListener {
             // reset playback slider
             musicPlayerGUI.setPlaybackSliderValue(0);
             currentTimeInMilli = 0;
-
             // update the current song to the first song in the playList
             currentSong = playList.get(0);
-
             // start from the beginning
             currentFrame = 0;
-
             // update the GUI
             musicPlayerGUI.enablePauseButtonDisablePlayButton();
             musicPlayerGUI.updateSongTitleAndArtist(currentSong);
             musicPlayerGUI.updatePlaybackSlider(currentSong);
-
             // start song
             playCurrentSong();
-
-
         }
     }
 
@@ -169,7 +154,6 @@ public class MusicPlayer extends PlaybackListener {
         }
 
         pressPrevious = true;
-
         // check if we are going out of range of the playlist
         if (currentPlaylistIndex - 1 < 0) {
             return;
@@ -202,24 +186,19 @@ public class MusicPlayer extends PlaybackListener {
             // read the audio file from the file path
             FileInputStream fileInputStream = new FileInputStream(currentSong.getFilePath());
             BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
-
             // create an AdvancedPlayer obj to play the audio file
             advancedPlayer = new AdvancedPlayer(bufferedInputStream);
             advancedPlayer.setPlayBackListener(this);
-
             // start music
             startMusicThread();
-
             // start the playback slider thread
             startPlaybackSliderThread();
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    // create a thread to play the music
 
+    // create a thread to play the music
     private void startMusicThread() {
         new Thread(new Runnable() {
             @Override
@@ -229,7 +208,6 @@ public class MusicPlayer extends PlaybackListener {
                         synchronized (playSignal) {
                             // update isPaused
                             isPaused = false;
-
                             // notify the other thread to continue
                             playSignal.notify();
                         }
@@ -245,8 +223,8 @@ public class MusicPlayer extends PlaybackListener {
             }
         }).start();
     }
-    // create a thread that will handle updating the slider
 
+    // create a thread that will handle updating the slider
     private void startPlaybackSliderThread() {
         new Thread(new Runnable() {
             @Override
