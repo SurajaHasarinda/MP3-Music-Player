@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Hashtable;
+import java.util.Objects;
 
 public class MusicPlayerGUI extends JFrame {
     // color of the window
@@ -51,12 +52,12 @@ public class MusicPlayerGUI extends JFrame {
 
     private void addGUIComponents() {
         // set the icon of the window
-        ImageIcon icon = loadImage("src/res/icon.jpg");
+        ImageIcon icon = loadImage("icon.jpg");
         setIconImage(icon.getImage());
         // add toolbar
         addToolBar();
         // load icon image
-        JLabel songImage = new JLabel(loadImage("src/res/icon.jpg"));
+        JLabel songImage = new JLabel(loadImage("icon.jpg"));
         songImage.setBounds(0, 50, getWidth() - 20, 225);
         add(songImage);
 
@@ -188,7 +189,7 @@ public class MusicPlayerGUI extends JFrame {
         playbackBtns.setBounds(0, 400, getWidth() - 10, 110);
         playbackBtns.setBackground(null);
         // previous button
-        JButton prevButton = new JButton(loadImage("src/res/previous.png"));
+        JButton prevButton = new JButton(loadImage("previous.png"));
         prevButton.setBorderPainted(false);
         prevButton.setBackground(null);
         prevButton.addActionListener(new ActionListener() {
@@ -201,7 +202,7 @@ public class MusicPlayerGUI extends JFrame {
         playbackBtns.add(prevButton);
 
         // play button
-        JButton playButton = new JButton(loadImage("src/res/play.png"));
+        JButton playButton = new JButton(loadImage("play.png"));
         playButton.setBorderPainted(false);
         playButton.setBackground(null);
         playButton.addActionListener(new ActionListener() {
@@ -216,7 +217,7 @@ public class MusicPlayerGUI extends JFrame {
         playbackBtns.add(playButton);
 
         // pause button
-        JButton pauseButton = new JButton(loadImage("src/res/pause.png"));
+        JButton pauseButton = new JButton(loadImage("pause.png"));
         pauseButton.setBorderPainted(false);
         pauseButton.setBackground(null);
         pauseButton.setVisible(false); // hide the pause button
@@ -232,7 +233,7 @@ public class MusicPlayerGUI extends JFrame {
         playbackBtns.add(pauseButton);
 
         // next button
-        JButton nextButton = new JButton(loadImage("src/res/next.png"));
+        JButton nextButton = new JButton(loadImage("next.png"));
         nextButton.setBorderPainted(false);
         nextButton.setBackground(null);
         nextButton.addActionListener(new ActionListener() {
@@ -305,10 +306,10 @@ public class MusicPlayerGUI extends JFrame {
         pauseButton.setEnabled(false);
     }
 
-    private ImageIcon loadImage(String imagePath) {
+    private ImageIcon loadImage(String imageName) {
         try {
             // read the image from the file from the path
-            BufferedImage image = ImageIO.read(new File(imagePath));
+            BufferedImage image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(imageName)));
             // return the image as an ImageIcon
             return new ImageIcon(image);
         } catch (Exception e) {
