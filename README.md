@@ -52,7 +52,7 @@ To run the MP3 Music Player locally, follow these steps:
   <img src="screenshots/Screenshot-1.png" alt="GUI" style="width:50%;"/>
 </div>
 
-## Original Source
+## Credits
 
 - TapTap (YouTube) : [MP3 Music Player App - Java Beginner Project Tutorial](https://www.youtube.com/watch?v=xf0aH2K3oJ4&t=1s)
 
